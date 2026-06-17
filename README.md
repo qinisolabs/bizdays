@@ -1,85 +1,82 @@
+<div align="center">
+
+<img src="docs/logo.svg" width="96" height="96" alt="Qiniso" />
+
 # bizdays
 
 **Verified business-day math for AI agents — holidays + per-country weekends, not guesses.**
 
-LLMs are good at "what's 5 + 3" and bad at "what date is 5 business days after Dec 22nd in the UK." They forget holidays, miscount, and assume every country's weekend is Saturday/Sunday. `bizdays` gives an agent the deterministic answer, with the weekend rule and the holidays it skipped shown in the response.
+*Verified, trustworthy data tools for AI agents. "Qiniso" means "truth" in Zulu.*
 
-It's both an **MCP server** (so any agent can call it live) and a **typed TypeScript library** (so you can import the same functions in your own code).
+[Website](https://qinisolabs.github.io/bizdays/) · [MCP endpoint](https://bizdays.qinisolabs.workers.dev/mcp) · [MCP Registry](https://registry.modelcontextprotocol.io/v0/servers?search=bizdays)
 
-Part of [Qiniso](https://github.com/qinisolabs) — verified, trustworthy data tools for AI agents.
+</div>
 
 ---
 
-## Why it exists
+LLMs answer "what date is 5 business days after Dec 22nd in the UK?", "how many working days are in this month?", and "is Friday a working day in Saudi Arabia?" confidently and often **wrongly** — they miscount, forget public holidays, and assume every country's weekend is Saturday/Sunday. **bizdays** gives an agent the deterministic answer from real public-holiday calendars and per-country weekend rules, showing the weekend rule and the exact holidays it skipped.
 
-Two things break naive business-day calculations, and `bizdays` fixes both:
+Two things break naive business-day math, and bizdays fixes both: **weekends aren't Sat/Sun everywhere** (Fri/Sat in Saudi Arabia, Egypt & Israel; Fri in Iran; Sun in India; Sat/Sun in the UAE since 2022), and **"holiday" must mean a real day off** — off-the-shelf data counts observances like Valentine's Day and Christmas Eve, which are not days off.
 
-1. **Weekends are not Sat/Sun everywhere.** Saudi Arabia, Egypt, Israel and Qatar use Friday/Saturday; Iran's is Friday; India's is Sunday; the UAE moved to Saturday/Sunday in 2022. `bizdays` resolves the weekend from Unicode CLDR per country, with a curated override layer for places CLDR gets wrong (e.g. Bangladesh is Fri/Sat, Nepal is Saturday-only).
+> Counting the working days in a month, a frontier LLM with no tools is **wrong 63% of the time**, cold — and **23% across business-day questions** overall. **bizdays: 0%.**
 
-2. **"Holiday" must mean a real day off.** Off-the-shelf holiday data often counts *observances* like Valentine's Day, Tax Day or Christmas Eve as holidays. Those are not days off. `bizdays` counts **only public holidays**, so your deadlines don't silently drift.
+## Add it to Claude
 
-## Install
-
-```bash
-npm install @qinisolabs/bizdays
-```
-
-### Use as an MCP server
-
-**Hosted (one paste, no install):** Settings → Connectors → *Add custom connector* and paste:
+Settings → Connectors → **Add custom connector**, and paste — no login, no key:
 
 ```
 https://bizdays.qinisolabs.workers.dev/mcp
 ```
 
-**Local (stdio):** run it yourself with `npx -y @qinisolabs/bizdays`, or wire it into an MCP client:
+Stateless, reads no user data, requires no secrets. Prefer to run it locally over stdio? Add `{ "command": "npx", "args": ["-y", "@qinisolabs/bizdays"] }` under `mcpServers` in your client config.
 
-```json
-{
-  "mcpServers": {
-    "bizdays": { "command": "npx", "args": ["-y", "@qinisolabs/bizdays"] }
-  }
-}
+## Use it as a library
+
+Every tool is also a typed function — no MCP required:
+
+```bash
+npm i @qinisolabs/bizdays
 ```
-
-Tools exposed:
-
-| Tool | What it answers |
-| --- | --- |
-| `add_business_days` | What date is N working days from a start date? (N may be negative) |
-| `count_business_days` | How many working days between two dates? |
-| `is_business_day` | Is this date a working day? If not, why? |
-| `next_business_day` | First working day after a date |
-| `previous_business_day` | Last working day before a date |
-| `country_rule` | How does bizdays treat this country? (weekend, source, confidence) |
-
-### Use as a library
 
 ```ts
 import { addBusinessDays, countBusinessDays, isBusinessDay } from "@qinisolabs/bizdays";
 
-addBusinessDays("2025-12-22", 5, "GB").result;        // "2025-12-31" (skips Christmas + Boxing Day)
-countBusinessDays("2025-12-01", "2025-12-31", "US");  // { businessDays: 22, ... } (excludes Christmas)
-isBusinessDay("2025-06-13", "SA").isBusinessDay;       // false — Friday is weekend in Saudi Arabia
-isBusinessDay("2025-02-14", "US").isBusinessDay;       // true — Valentine's Day is not a public holiday
+addBusinessDays("2025-12-22", 5, "GB").result;       // "2025-12-31" (skips Christmas + Boxing Day)
+countBusinessDays("2025-12-01", "2025-12-31", "US"); // { businessDays: 22, ... }
+isBusinessDay("2025-06-13", "SA").isBusinessDay;      // false — Friday is weekend in Saudi Arabia
+isBusinessDay("2025-02-14", "US").isBusinessDay;      // true  — Valentine's Day is not a public holiday
 ```
 
-Every function returns a rich result object: the answer, the weekday, exactly which weekends and named holidays were skipped, the weekend rule and its source, and a confidence flag.
+Every function returns a rich result: the answer, the weekday, exactly which weekends and named holidays were skipped, the weekend rule and its source, and a confidence flag.
 
-## Data & coverage
+## What it does — 6 tools
 
-- **Holidays:** public holidays for **206 countries** (and subdivisions), via [`date-holidays`](https://github.com/commenthol/date-holidays), filtered to `type: "public"`.
-- **Weekends:** Unicode CLDR via the runtime `Intl` API, plus a curated `data/weekend-overrides.json` correction layer maintained by Qiniso.
-- **Confidence:** a Tier-1 list of ~65 countries has its weekend rule manually verified and (where a calendar exists) holiday parity-tested; results for those are flagged `verified`. Everything else still works but is flagged `unverified` so the agent knows.
-- **No holiday calendar for a country?** (e.g. Qatar, Kuwait, Oman) — `bizdays` still applies the correct weekend and tells you, via `holidaysApplied: false`, that holidays were not applied. Pass `extraHolidays` to supply your own.
+| Tool | What it answers |
+| --- | --- |
+| **add_business_days** | What date is N working days from a start date? (N may be negative) |
+| **count_business_days** | How many working days between two dates? (endpoints inclusive by default) |
+| **is_business_day** | Is this date a working day? If not, why (weekend / public holiday with its name)? |
+| **next_business_day** | First working day strictly after a date |
+| **previous_business_day** | Last working day strictly before a date |
+| **country_rule** | The weekend rule + its source, whether holidays apply, and a confidence flag |
 
-Dates are plain `YYYY-MM-DD` strings, handled in UTC — no timezone surprises.
+Public holidays for **206 countries** (and subdivisions) come from [`date-holidays`](https://github.com/commenthol/date-holidays), filtered to `type: "public"`. Weekends come from **Unicode CLDR** via the runtime `Intl` API, plus a curated `data/weekend-overrides.json` correction layer (e.g. Bangladesh Fri/Sat, Nepal Sat-only) — the maintained data is the moat.
 
-## Notes
+## What it is *not*
 
-- The start date is never counted by `add_business_days`; the result is always a business day.
-- `count_business_days` includes both endpoints by default (set `inclusive: false` to drop the start).
-- Need company shutdown days or regional holidays? Pass them as `extraHolidays` (an array of `YYYY-MM-DD`).
+- **Not all-holidays.** It counts weekends and **public** holidays only — not regional or optional observances. Pass company shutdowns or regional days via `extraHolidays`.
+- **Not uniformly verified.** A Tier-1 set of ~65 countries is verified; others work but are flagged `unverified`. Where no holiday calendar exists (e.g. Qatar, Kuwait, Oman), the correct weekend still applies and the response says so (`holidaysApplied: false`).
+- **Not a live service dependency.** The library makes no network calls; dates are `YYYY-MM-DD` in UTC.
+
+## Architecture
+
+A single TypeScript package exposing one MCP server over two transports — **stdio** (local / `npx`) and a **Cloudflare Worker** (the hosted edge endpoint) — both driven by the same `core.ts` tool definitions, which also power the importable library.
+
+```bash
+npm install
+npm run build
+npm test
+```
 
 ## License
 
