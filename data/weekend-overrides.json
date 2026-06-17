@@ -1,0 +1,17 @@
+{
+  "_comment": "Curated corrections to CLDR weekend data (Intl.Locale.getWeekInfo). Day numbers are ISO-8601: 1=Mon .. 7=Sun. CLDR is the base source; these entries override countries where CLDR is outdated or wrong. This curated layer is maintained by Qiniso. Each entry cites its reason.",
+  "overrides": {
+    "BD": {
+      "weekend": [5, 6],
+      "cldr": [6, 7],
+      "reason": "Bangladesh's official weekly holiday is Friday & Saturday; CLDR still reports Sat/Sun.",
+      "source": "Government of Bangladesh weekly holiday (Friday-Saturday)"
+    },
+    "NP": {
+      "weekend": [6],
+      "cldr": [6, 7],
+      "reason": "Nepal observes a single weekly day off (Saturday); CLDR reports Sat/Sun.",
+      "source": "Nepal official weekly holiday (Saturday only)"
+    }
+  }
+}

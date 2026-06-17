@@ -1,0 +1,46 @@
+{
+  "name": "@qinisolabs/bizdays",
+  "version": "0.1.0",
+  "mcpName": "io.github.qinisolabs/bizdays",
+  "description": "Verified business-day math for AI agents: holidays + per-country weekends, not guesses.",
+  "license": "Apache-2.0",
+  "author": "Qiniso",
+  "homepage": "https://github.com/qinisolabs/bizdays#readme",
+  "repository": { "type": "git", "url": "git+https://github.com/qinisolabs/bizdays.git" },
+  "bugs": { "url": "https://github.com/qinisolabs/bizdays/issues" },
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "bin": { "bizdays-mcp": "dist/server.js" },
+  "files": ["dist", "data", "README.md", "LICENSE", "NOTICE"],
+  "engines": { "node": ">=18" },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "agents",
+    "llm",
+    "business-days",
+    "working-days",
+    "holidays",
+    "weekend",
+    "date",
+    "calendar",
+    "sla"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "test": "tsx test/parity.test.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "date-holidays": "^3.30.2",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "tsx": "^4.16.0",
+    "@types/node": "^20.14.0"
+  }
+}

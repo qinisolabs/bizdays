@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "category": "add",
+    "question": "In US, what date is 5 business day(s) after 2025-12-22? Skip US's weekends and public holidays. Answer YYYY-MM-DD.",
+    "answer": "2025-12-30"
+  },
+  {
+    "id": 2,
+    "category": "add",
+    "question": "In GB, what date is 5 business day(s) after 2025-12-22? Skip GB's weekends and public holidays. Answer YYYY-MM-DD.",
+    "answer": "2025-12-31"
+  },
+  {
+    "id": 3,
+    "category": "add",
+    "question": "In US, what date is 3 business day(s) after 2025-07-02? Skip US's weekends and public holidays. Answer YYYY-MM-DD.",
+    "answer": "2025-07-08"
+  },
+  {
+    "id": 4,
+    "category": "add",
+    "question": "In ZA, what date is 4 business day(s) after 2025-04-16? Skip ZA's weekends and public holidays. Answer YYYY-MM-DD.",
+    "answer": "2025-04-24"
+  },
+  {
+    "id": 5,
+    "category": "add",
+    "question": "In JP, what date is 2 business day(s) after 2025-04-30? Skip JP's weekends and public holidays. Answer YYYY-MM-DD.",
+    "answer": "2025-05-02"
+  },
+  {
+    "id": 6,
+    "category": "add",
+    "question": "In DE, what date is 3 business day(s) after 2025-05-01? Skip DE's weekends and public holidays. Answer YYYY-MM-DD.",
+    "answer": "2025-05-06"
+  },
+  {
+    "id": 7,
+    "category": "add",
+    "question": "In AE, what date is 1 business day(s) after 2025-06-12? Skip AE's weekends and public holidays. Answer YYYY-MM-DD.",
+    "answer": "2025-06-13"
+  },
+  {
+    "id": 8,
+    "category": "add",
+    "question": "In SA, what date is 1 business day(s) after 2025-06-12? Skip SA's weekends and public holidays. Answer YYYY-MM-DD.",
+    "answer": "2025-06-15"
+  },
+  {
+    "id": 9,
+    "category": "add",
+    "question": "In IN, what date is 5 business day(s) after 2025-08-13? Skip IN's weekends and public holidays. Answer YYYY-MM-DD.",
+    "answer": "2025-08-20"
+  },
+  {
+    "id": 10,
+    "category": "add",
+    "question": "In BR, what date is 2 business day(s) after 2025-12-24? Skip BR's weekends and public holidays. Answer YYYY-MM-DD.",
+    "answer": "2025-12-29"
+  },
+  {
+    "id": 11,
+    "category": "add",
+    "question": "In AU, what date is 4 business day(s) after 2025-01-23? Skip AU's weekends and public holidays. Answer YYYY-MM-DD.",
+    "answer": "2025-01-30"
+  },
+  {
+    "id": 12,
+    "category": "add",
+    "question": "In EG, what date is 3 business day(s) after 2025-03-19? Skip EG's weekends and public holidays. Answer YYYY-MM-DD.",
+    "answer": "2025-03-24"
+  },
+  {
+    "id": 13,
+    "category": "count",
+    "question": "In US, how many business days are there from 2025-12-01 to 2025-12-31 inclusive (excluding US weekends and public holidays)? Give a number.",
+    "answer": "22"
+  },
+  {
+    "id": 14,
+    "category": "count",
+    "question": "In GB, how many business days are there from 2025-12-01 to 2025-12-31 inclusive (excluding GB weekends and public holidays)? Give a number.",
+    "answer": "21"
+  },
+  {
+    "id": 15,
+    "category": "count",
+    "question": "In GB, how many business days are there from 2025-05-01 to 2025-05-31 inclusive (excluding GB weekends and public holidays)? Give a number.",
+    "answer": "20"
+  },
+  {
+    "id": 16,
+    "category": "count",
+    "question": "In ZA, how many business days are there from 2025-04-01 to 2025-04-30 inclusive (excluding ZA weekends and public holidays)? Give a number.",
+    "answer": "19"
+  },
+  {
+    "id": 17,
+    "category": "count",
+    "question": "In JP, how many business days are there from 2025-01-01 to 2025-01-31 inclusive (excluding JP weekends and public holidays)? Give a number.",
+    "answer": "21"
+  },
+  {
+    "id": 18,
+    "category": "count",
+    "question": "In US, how many business days are there from 2025-09-01 to 2025-09-30 inclusive (excluding US weekends and public holidays)? Give a number.",
+    "answer": "21"
+  },
+  {
+    "id": 19,
+    "category": "count",
+    "question": "In AE, how many business days are there from 2025-06-01 to 2025-06-30 inclusive (excluding AE weekends and public holidays)? Give a number.",
+    "answer": "19"
+  },
+  {
+    "id": 20,
+    "category": "count",
+    "question": "In IN, how many business days are there from 2025-05-01 to 2025-05-31 inclusive (excluding IN weekends and public holidays)? Give a number.",
+    "answer": "27"
+  },
+  {
+    "id": 21,
+    "category": "is",
+    "question": "In US, is 2025-12-25 a business day (not a weekend or public holiday)? Answer yes or no.",
+    "answer": "no"
+  },
+  {
+    "id": 22,
+    "category": "is",
+    "question": "In GB, is 2025-12-26 a business day (not a weekend or public holiday)? Answer yes or no.",
+    "answer": "no"
+  },
+  {
+    "id": 23,
+    "category": "is",
+    "question": "In SA, is 2025-06-13 a business day (not a weekend or public holiday)? Answer yes or no.",
+    "answer": "no"
+  },
+  {
+    "id": 24,
+    "category": "is",
+    "question": "In AE, is 2025-06-13 a business day (not a weekend or public holiday)? Answer yes or no.",
+    "answer": "yes"
+  },
+  {
+    "id": 25,
+    "category": "is",
+    "question": "In US, is 2025-07-04 a business day (not a weekend or public holiday)? Answer yes or no.",
+    "answer": "no"
+  },
+  {
+    "id": 26,
+    "category": "is",
+    "question": "In AU, is 2025-04-25 a business day (not a weekend or public holiday)? Answer yes or no.",
+    "answer": "no"
+  },
+  {
+    "id": 27,
+    "category": "is",
+    "question": "In DE, is 2025-10-03 a business day (not a weekend or public holiday)? Answer yes or no.",
+    "answer": "no"
+  },
+  {
+    "id": 28,
+    "category": "is",
+    "question": "In IN, is 2025-01-26 a business day (not a weekend or public holiday)? Answer yes or no.",
+    "answer": "no"
+  },
+  {
+    "id": 29,
+    "category": "is",
+    "question": "In SA, is 2025-09-23 a business day (not a weekend or public holiday)? Answer yes or no.",
+    "answer": "no"
+  },
+  {
+    "id": 30,
+    "category": "is",
+    "question": "In BR, is 2025-11-15 a business day (not a weekend or public holiday)? Answer yes or no.",
+    "answer": "no"
+  }
+]

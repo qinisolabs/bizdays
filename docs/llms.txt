@@ -1,0 +1,37 @@
+# bizdays
+
+> Verified business-day math for AI agents: add/count working days, or check if a date is a
+> working day, using real public-holiday calendars and per-country weekend rules. Ships as an
+> MCP server and a typed TypeScript library. By Qiniso — verified, trustworthy data tools for
+> AI agents.
+
+## What it does
+- add_business_days: add/subtract N working days to a date, skipping that country's weekends + public holidays.
+- count_business_days: count working days between two dates (endpoints inclusive by default).
+- is_business_day: is a date a working day? If not, why (weekend / public holiday with its name)?
+- next_business_day / previous_business_day: nearest working day after/before a date.
+- country_rule: the weekend rule (and its source), whether holidays are applied, and a confidence flag.
+
+## Why
+Two things break naive business-day math, and bizdays fixes both:
+1. Weekends are not Sat/Sun everywhere — Saudi Arabia/Egypt/Israel use Fri/Sat, Iran Fri, India Sun, UAE moved to Sat/Sun in 2022.
+2. "Holiday" must mean a real day off — off-the-shelf data often counts observances (Valentine's Day, Tax Day, Christmas Eve), which are NOT days off.
+On a 30-question 2025 benchmark, a frontier model with no tools was wrong ~23% of the time overall — and 63% when counting the working days in a month. bizdays is correct by construction (100%).
+
+## Data
+- Holidays: public holidays for 206 countries (and subdivisions) via date-holidays, filtered to type "public".
+- Weekends: Unicode CLDR via the Intl API, plus a curated override layer (data/weekend-overrides.json).
+- Confidence: ~65 Tier-1 countries are verified; others work but are flagged "unverified". Dates are YYYY-MM-DD in UTC.
+
+## Scope
+Computes working days from weekends + public holidays. Does NOT include regional/optional
+holidays unless you pass them via extraHolidays. No network calls.
+
+## Install
+- MCP: npx -y @qinisolabs/bizdays  (tools: add_business_days, count_business_days, is_business_day, next_business_day, previous_business_day, country_rule)
+- Library: npm install @qinisolabs/bizdays
+
+## Links
+- Repo: https://github.com/qinisolabs/bizdays
+- npm: https://www.npmjs.com/package/@qinisolabs/bizdays
+- License: Apache-2.0

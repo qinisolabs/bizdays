@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>bizdays — verified business-day math for AI agents</title>
+<meta name="description" content="Verified business-day math for AI agents: holidays + per-country weekends, not guesses. MCP server + TypeScript library by Qiniso.">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<style>
+  :root{
+    --emerald:#10b981; --emerald-dark:#047857; --ink:#0b1220; --muted:#5b6473;
+    --bg:#f7faf9; --card:#ffffff; --line:#e3eae7; --code:#0e1726;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       color:var(--ink);background:var(--bg);line-height:1.55}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px}
+  header{padding:64px 0 28px;text-align:center}
+  .logo{width:84px;height:84px;border-radius:22px;box-shadow:0 8px 28px rgba(4,120,87,.28)}
+  h1{font-size:2.6rem;margin:.5rem 0 .2rem;letter-spacing:-.02em}
+  .tag{font-size:1.18rem;color:var(--muted);margin:0 auto;max-width:40ch}
+  .by{margin-top:10px;font-size:.92rem;color:var(--muted)}
+  .by a{color:var(--emerald-dark);text-decoration:none;font-weight:600}
+  .cta{margin-top:22px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-block;padding:11px 20px;border-radius:10px;font-weight:600;text-decoration:none;font-size:.98rem}
+  .btn.primary{background:var(--emerald-dark);color:#fff}
+  .btn.ghost{background:#fff;color:var(--emerald-dark);border:1px solid var(--line)}
+  section{margin:40px 0}
+  h2{font-size:1.35rem;letter-spacing:-.01em;margin:0 0 14px}
+  .lead{color:var(--muted);max-width:64ch}
+  .bench{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:0 1px 0 rgba(0,0,0,.02)}
+  .headline{display:flex;gap:28px;flex-wrap:wrap;align-items:flex-end;margin-bottom:20px}
+  .stat{flex:1;min-width:160px}
+  .stat .num{font-size:3rem;font-weight:800;line-height:1}
+  .stat.bad .num{color:#c0392b}
+  .stat.good .num{color:var(--emerald-dark)}
+  .stat .lbl{color:var(--muted);font-size:.95rem;margin-top:6px}
+  table{width:100%;border-collapse:collapse;margin-top:8px}
+  th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);font-size:.96rem}
+  th{color:var(--muted);font-weight:600}
+  .bar{height:9px;border-radius:5px;background:#eef2f1;overflow:hidden;min-width:120px}
+  .bar > span{display:block;height:100%;background:#c0392b}
+  td.r{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+  .note{font-size:.85rem;color:var(--muted);margin-top:14px}
+  pre{background:var(--code);color:#e6edf3;border-radius:12px;padding:16px 18px;overflow:auto;font-size:.88rem;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .tool{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .tool code{color:var(--emerald-dark);font-weight:700}
+  .tool p{margin:.4rem 0 0;color:var(--muted);font-size:.92rem}
+  .pill{display:inline-block;background:#ecfdf5;color:var(--emerald-dark);border:1px solid #c7ece0;
+        border-radius:999px;padding:2px 10px;font-size:.8rem;font-weight:600;margin:2px 4px 2px 0}
+  footer{margin:56px 0 40px;color:var(--muted);font-size:.88rem;text-align:center}
+  footer a{color:var(--emerald-dark);text-decoration:none}
+  @media(max-width:620px){.grid{grid-template-columns:1fr}h1{font-size:2.1rem}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <img class="logo" src="logo.svg" alt="Qiniso logo">
+    <h1>bizdays</h1>
+    <p class="tag">Verified business-day math for AI agents — holidays + per-country weekends, not guesses.</p>
+    <p class="by">by <a href="https://github.com/qinisolabs">Qiniso</a> · verified, trustworthy data tools for AI agents</p>
+    <div class="cta">
+      <a class="btn primary" href="https://www.npmjs.com/package/@qinisolabs/bizdays">npm</a>
+      <a class="btn ghost" href="https://github.com/qinisolabs/bizdays">GitHub</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <p class="lead">"What date is 5 business days after Dec 22nd in the UK?" "How many working
+    days are in this month?" "Is Friday a working day in Saudi Arabia?" LLMs answer these
+    confidently and often wrongly — they miscount, forget holidays, and assume every country's
+    weekend is Saturday/Sunday. <strong>bizdays</strong> gives an agent the deterministic
+    answer, showing the weekend rule and the exact holidays it skipped. MCP server + typed
+    TypeScript library.</p>
+  </section>
+
+  <section>
+    <h2>The benchmark</h2>
+    <div class="bench">
+      <div class="headline">
+        <div class="stat bad"><div class="num">63%</div><div class="lbl">LLM alone, wrong — counting working days in a month</div></div>
+        <div class="stat good"><div class="num">0%</div><div class="lbl">LLM + bizdays, wrong</div></div>
+      </div>
+      <table>
+        <thead><tr><th>Task</th><th>LLM-alone error</th><th></th><th class="r">bizdays</th></tr></thead>
+        <tbody>
+          <tr><td>Count working days in a month</td><td class="r">63%</td><td><div class="bar"><span style="width:63%"></span></div></td><td class="r">0%</td></tr>
+          <tr><td>Is this date a working day? (weekend / holiday)</td><td class="r">20%</td><td><div class="bar"><span style="width:20%"></span></div></td><td class="r">0%</td></tr>
+          <tr><td>Add N working days to a date</td><td class="r">0%</td><td><div class="bar"><span style="width:2%"></span></div></td><td class="r">0%</td></tr>
+          <tr><td><strong>Overall</strong></td><td class="r"><strong>23%</strong></td><td><div class="bar"><span style="width:23%"></span></div></td><td class="r"><strong>0%</strong></td></tr>
+        </tbody>
+      </table>
+      <p class="note">Method: 30 business-day questions across 12 countries on the 2025
+      calendar, asked of a frontier model with no tools, scored against ground truth computed
+      from authoritative sources (date-holidays for public holidays, Unicode CLDR for
+      weekends). The model does fine on small "add N days" hops but breaks on counting a full
+      month and on non-Western weekends (it flipped a UAE Friday and Saudi National Day).
+      bizdays is deterministic — correct by construction. Reproduce or extend it on any model
+      with the harness in the repo (<code>bench/</code>).</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Why it's right when libraries are wrong</h2>
+    <p class="lead">Two failure modes, both fixed:</p>
+    <div class="grid">
+      <div class="tool"><code>Weekends ≠ Sat/Sun</code><p>Resolved per country from Unicode CLDR — Fri/Sat in Saudi Arabia, Egypt, Israel; Fri in Iran; Sun in India; Sat/Sun in the UAE (post-2022) — with a curated override layer for cases CLDR gets wrong (Bangladesh, Nepal).</p></div>
+      <div class="tool"><code>Public holidays only</code><p>Off-the-shelf holiday data counts observances like Valentine's Day, Tax Day and Christmas Eve as holidays. Those aren't days off. bizdays counts only real public holidays, so deadlines don't drift.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Use it</h2>
+    <p class="lead">As an MCP server, in your client config:</p>
+<pre>{
+  "mcpServers": {
+    "bizdays": { "command": "npx", "args": ["-y", "@qinisolabs/bizdays"] }
+  }
+}</pre>
+    <p class="lead">As a TypeScript library:</p>
+<pre>npm install @qinisolabs/bizdays
+
+import { addBusinessDays, countBusinessDays, isBusinessDay } from "@qinisolabs/bizdays";
+
+addBusinessDays("2025-12-22", 5, "GB").result;   // "2025-12-31" (skips Christmas + Boxing Day)
+isBusinessDay("2025-06-13", "SA").isBusinessDay;  // false — Friday is weekend in Saudi Arabia
+isBusinessDay("2025-02-14", "US").isBusinessDay;  // true  — Valentine's Day is not a public holiday</pre>
+  </section>
+
+  <section>
+    <h2>Tools</h2>
+    <div class="grid">
+      <div class="tool"><code>add_business_days</code><p>Add or subtract N working days to a date, skipping weekends + public holidays.</p></div>
+      <div class="tool"><code>count_business_days</code><p>Count working days between two dates, with a weekend/holiday breakdown.</p></div>
+      <div class="tool"><code>is_business_day</code><p>Is a date a working day? If not, the precise reason and holiday name.</p></div>
+      <div class="tool"><code>next_business_day</code><p>First working day strictly after a date.</p></div>
+      <div class="tool"><code>previous_business_day</code><p>Last working day strictly before a date.</p></div>
+      <div class="tool"><code>country_rule</code><p>Weekend rule + source, whether holidays apply, and a confidence flag.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Coverage</h2>
+    <p class="lead">Public holidays for 206 countries and subdivisions (via date-holidays,
+    filtered to public holidays only). Weekends from CLDR with curated corrections. A Tier-1
+    set of ~65 countries is verified; others work but are flagged <code>unverified</code> so
+    the agent knows. Where no holiday calendar exists (e.g. Qatar, Kuwait, Oman), the correct
+    weekend is still applied and the response says so.</p>
+    <p style="margin-top:14px">
+      <span class="pill">United States</span><span class="pill">United Kingdom</span><span class="pill">Germany</span><span class="pill">Saudi Arabia</span><span class="pill">UAE</span><span class="pill">India</span><span class="pill">Japan</span><span class="pill">Brazil</span><span class="pill">South Africa</span><span class="pill">Israel</span><span class="pill">+55 more verified</span>
+    </p>
+  </section>
+
+  <section>
+    <h2>Scope</h2>
+    <p class="lead">bizdays computes working days from <strong>weekends and public holidays</strong>.
+    It does <strong>not</strong> include regional or optional holidays unless you pass them via
+    <code>extraHolidays</code>, and it makes no network calls. Dates are plain
+    <code>YYYY-MM-DD</code>, handled in UTC.</p>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    Apache-2.0 · <a href="https://github.com/qinisolabs/bizdays">github.com/qinisolabs/bizdays</a> ·
+    <a href="https://github.com/qinisolabs">Qiniso</a>
+  </div>
+</footer>
+</body>
+</html>

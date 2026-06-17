@@ -1,0 +1,12 @@
+bizdays
+Copyright 2026 Qiniso
+
+This product includes data and software from third parties:
+
+- date-holidays (https://github.com/commenthol/date-holidays)
+  Licensed under ISC AND CC-BY-3.0. The bundled public-holiday calendars are
+  derived from this project's dataset. Attribution per CC-BY-3.0.
+
+- Weekend rules are derived from the Unicode CLDR project via the runtime
+  Intl.Locale API, with curated corrections maintained by Qiniso in
+  data/weekend-overrides.json.

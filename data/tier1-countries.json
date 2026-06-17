@@ -1,0 +1,13 @@
+{
+  "_comment": "Tier-1 countries: weekend rule manually verified and (where supported) holiday calendar parity-tested. Countries outside this list still work but are returned with confidence 'unverified'. ISO 3166-1 alpha-2 codes.",
+  "tier1": [
+    "US", "CA", "MX", "BR", "AR",
+    "GB", "IE", "FR", "DE", "IT", "ES", "PT", "NL", "BE", "LU",
+    "AT", "CH", "DK", "SE", "NO", "FI", "PL", "CZ", "SK", "HU",
+    "RO", "BG", "GR", "HR", "SI", "EE", "LV", "LT", "CY", "MT",
+    "RU", "TR", "ZA", "EG", "NG", "KE",
+    "SA", "AE", "QA", "KW", "OM", "BH", "IL", "JO", "IR",
+    "IN", "BD", "NP", "PK", "CN", "JP", "KR", "ID", "SG", "MY",
+    "TH", "PH", "VN", "AU", "NZ"
+  ]
+}
