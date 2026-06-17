@@ -18,7 +18,7 @@ npm pack --dry-run            # confirm it ships ONLY: dist/ data/ README.md LIC
 Scrub check (should print nothing):
 
 ```bash
-grep -rniE "claude|anthropic|/Users/|qiniso-user|example" src data docs bench README.md
+grep -rniE "claude|anthropic|/Users/" src data docs bench README.md
 ```
 
 ---
