@@ -1,18 +1,10 @@
-import { readFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
-import { dirname, join } from "node:path";
 import { weekendInfo, isWeekendDay, type WeekendSource } from "./weekends.js";
 import { holidaySupported, publicHolidayOn, type HolidayHit } from "./holidays.js";
 import { parseISODate, formatISODate, addDays, weekdayName } from "./dates.js";
+import { TIER1 as TIER1_CODES } from "./data.generated.js";
 
-// Load curated data at runtime (readFileSync, not JSON import attributes) for
-// Node 18.0+ compatibility.
-const DATA_DIR = join(dirname(fileURLToPath(import.meta.url)), "..", "data");
-const tier1Data = JSON.parse(
-  readFileSync(join(DATA_DIR, "tier1-countries.json"), "utf8")
-) as { tier1: string[] };
-
-const TIER1 = new Set(tier1Data.tier1.map((c) => c.toUpperCase()));
+// Curated data via the generated module (no node:fs → Worker-bundleable).
+const TIER1 = new Set(TIER1_CODES.map((c) => c.toUpperCase()));
 
 // Common non-ISO inputs mapped to their ISO 3166-1 alpha-2 code. "UK" is the big
 // one: the ISO code is GB, and date-holidays only has a calendar under GB.

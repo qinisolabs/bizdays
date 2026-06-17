@@ -1,0 +1,15 @@
+# Cloudflare Worker deploy config for the hosted (edge) endpoint.
+# Requires wrangler: `npm i -g wrangler` (or use `npx wrangler`). Deploy: `wrangler deploy`.
+# Free tier: 100k requests/day. wrangler bundles the TS entry (esbuild) and inlines
+# date-holidays + the generated data module, so no node:fs is needed at the edge.
+name = "bizdays"
+main = "src/worker.ts"
+compatibility_date = "2025-06-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Regenerate the data module before bundling (same as `npm run gen`).
+[build]
+command = "node scripts/gen-data.mjs"
+
+# After deploy the endpoint is:  https://bizdays.<your-subdomain>.workers.dev/mcp
+# (for the qinisolabs account: https://bizdays.qinisolabs.workers.dev/mcp)

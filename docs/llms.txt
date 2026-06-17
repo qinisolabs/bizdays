@@ -28,7 +28,8 @@ Computes working days from weekends + public holidays. Does NOT include regional
 holidays unless you pass them via extraHolidays. No network calls.
 
 ## Install
-- MCP: npx -y @qinisolabs/bizdays  (tools: add_business_days, count_business_days, is_business_day, next_business_day, previous_business_day, country_rule)
+- Hosted MCP (add custom connector): https://bizdays.qinisolabs.workers.dev/mcp  (tools: add_business_days, count_business_days, is_business_day, next_business_day, previous_business_day, country_rule)
+- Local MCP: npx -y @qinisolabs/bizdays
 - Library: npm install @qinisolabs/bizdays
 
 ## Links

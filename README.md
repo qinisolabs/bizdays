@@ -26,7 +26,13 @@ npm install @qinisolabs/bizdays
 
 ### Use as an MCP server
 
-Run it with `npx -y @qinisolabs/bizdays`, or wire it into an MCP client. Example (Claude Desktop config):
+**Hosted (one paste, no install):** Settings → Connectors → *Add custom connector* and paste:
+
+```
+https://bizdays.qinisolabs.workers.dev/mcp
+```
+
+**Local (stdio):** run it yourself with `npx -y @qinisolabs/bizdays`, or wire it into an MCP client:
 
 ```json
 {

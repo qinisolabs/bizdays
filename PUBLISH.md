@@ -77,6 +77,32 @@ If the registry schema has changed since this was written, re-check the quicksta
 
 ---
 
+## 3b. Deploy the hosted endpoint (Cloudflare Worker)
+
+The hosted MCP at `bizdays.qinisolabs.workers.dev/mcp` is what the landing page's
+"Add custom connector" points to. Deploy it with wrangler, on the same Cloudflare
+account as qiniso. Free tier (100k req/day); stateless, no secrets:
+
+```bash
+npm i -g wrangler        # or use npx wrangler
+wrangler login           # browser auth → qinisolabs Cloudflare account
+npm run deploy           # = wrangler deploy (runs gen-data, bundles src/worker.ts)
+```
+
+Verify:
+
+```bash
+curl https://bizdays.qinisolabs.workers.dev/health      # {"status":"ok"}
+curl -s -X POST https://bizdays.qinisolabs.workers.dev/mcp \
+  -H 'content-type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'    # lists 6 tools
+```
+
+> Updates are versioned: bump `version` in package.json **and** server.json (now 0.2.0),
+> then `npm publish`, `git push`, `mcp-publisher publish`, and `npm run deploy` again.
+
+---
+
 ## 4. GitHub Pages (Step 10)
 
 Repo → **Settings → Pages → Deploy from branch → `main` / `/docs`**.

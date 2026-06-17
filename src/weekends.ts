@@ -1,20 +1,9 @@
-import { readFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
-import { dirname, join } from "node:path";
+// Data comes from src/data.generated.ts (built from data/*.json by scripts/gen-data.mjs).
+// Using a generated TS module instead of node:fs keeps this code bundleable in a
+// Cloudflare Worker (no filesystem at the edge).
+import { WEEKEND_OVERRIDES } from "./data.generated.js";
 
-// Load curated data at runtime (readFileSync, not JSON import attributes) so we
-// stay compatible with Node 18.0+ as declared in package.json `engines`.
-const DATA_DIR = join(dirname(fileURLToPath(import.meta.url)), "..", "data");
-const overridesData = JSON.parse(
-  readFileSync(join(DATA_DIR, "weekend-overrides.json"), "utf8")
-) as {
-  overrides: Record<
-    string,
-    { weekend: number[]; cldr: number[]; reason: string; source: string }
-  >;
-};
-
-const OVERRIDES = overridesData.overrides;
+const OVERRIDES = WEEKEND_OVERRIDES;
 
 export type WeekendSource = "override" | "cldr" | "default";
 

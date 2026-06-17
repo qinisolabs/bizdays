@@ -9,6 +9,7 @@ import {
   weekendInfo,
   publicHolidayOn,
 } from "../src/index.js";
+import { handleRpc } from "../src/core.js";
 
 let pass = 0;
 let fail = 0;
@@ -153,6 +154,44 @@ check("absurd date range is rejected", () => {
 });
 check("invalid date throws", () => {
   assert.throws(() => isBusinessDay("2025-13-40", "US"));
+});
+
+/* ---------- core / handleRpc (the hosted HTTP + Worker wire path) ---------- */
+check("initialize returns serverInfo bizdays", () => {
+  const r: any = handleRpc({ jsonrpc: "2.0", id: 1, method: "initialize", params: {} });
+  assert.equal(r.result.serverInfo.name, "bizdays");
+});
+check("tools/list returns 6 tools", () => {
+  const r: any = handleRpc({ jsonrpc: "2.0", id: 2, method: "tools/list" });
+  assert.equal(r.result.tools.length, 6);
+});
+check("tools/call add_business_days skips Christmas", () => {
+  const r: any = handleRpc({
+    jsonrpc: "2.0", id: 3, method: "tools/call",
+    params: { name: "add_business_days", arguments: { start: "2025-12-24", days: 1, country: "US" } },
+  });
+  const out = JSON.parse(r.result.content[0].text);
+  assert.equal(out.result, "2025-12-26");
+});
+check("tools/call coerces numeric days from string", () => {
+  const r: any = handleRpc({
+    jsonrpc: "2.0", id: 4, method: "tools/call",
+    params: { name: "add_business_days", arguments: { start: "2025-06-13", days: "1", country: "US" } },
+  });
+  assert.equal(JSON.parse(r.result.content[0].text).result, "2025-06-16");
+});
+check("notifications/initialized produces no response", () =>
+  assert.equal(handleRpc({ jsonrpc: "2.0", method: "notifications/initialized" }), null));
+check("unknown method returns -32601", () => {
+  const r: any = handleRpc({ jsonrpc: "2.0", id: 5, method: "nope" });
+  assert.equal(r.error.code, -32601);
+});
+check("tools/call on a bad date surfaces a JSON-RPC error", () => {
+  const r: any = handleRpc({
+    jsonrpc: "2.0", id: 6, method: "tools/call",
+    params: { name: "is_business_day", arguments: { date: "2025-13-40", country: "US" } },
+  });
+  assert.ok(r.error && typeof r.error.message === "string");
 });
 
 /* ---------- summary ---------- */
