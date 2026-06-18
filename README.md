@@ -8,7 +8,7 @@
 
 *Verified, trustworthy data tools for AI agents. "Qiniso" means "truth" in Zulu.*
 
-[Website](https://qinisolabs.github.io/bizdays/) · [MCP endpoint](https://bizdays.qinisolabs.workers.dev/mcp) · [MCP Registry](https://registry.modelcontextprotocol.io/v0/servers?search=bizdays)
+[Website](https://qinisolabs.github.io/bizdays/) · [npm](https://www.npmjs.com/package/@qinisolabs/bizdays) · [MCP endpoint](https://bizdays.qinisolabs.workers.dev/mcp) · [MCP Registry](https://registry.modelcontextprotocol.io/v0/servers?search=bizdays)
 
 </div>
 
