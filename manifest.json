@@ -1,0 +1,43 @@
+{
+  "manifest_version": "0.3",
+  "name": "bizdays",
+  "display_name": "bizdays — business days & public holidays",
+  "version": "0.2.1",
+  "description": "Business-day & public-holiday calculations for 200+ countries for AI agents — not guesses.",
+  "long_description": "Deterministic business-day and public-holiday calculations for 200+ countries: add or count working days, find the next/previous business day, check whether a date is a business day, and inspect a country's weekend rule — correctly handling country-specific weekends and holidays that models routinely get wrong. Runs locally, no key.",
+  "author": {
+    "name": "Qiniso",
+    "url": "https://github.com/qinisolabs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qinisolabs/bizdays"
+  },
+  "homepage": "https://qinisolabs.github.io/bizdays",
+  "documentation": "https://qinisolabs.github.io/bizdays",
+  "support": "https://github.com/qinisolabs/bizdays/issues",
+  "license": "Apache-2.0",
+  "keywords": ["business-days", "working-days", "public-holidays", "calendar", "dates"],
+  "server": {
+    "type": "node",
+    "entry_point": "server/server.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/server/server.js"],
+      "env": {}
+    }
+  },
+  "tools": [
+    { "name": "add_business_days", "description": "Add N working days to a date (country-aware)." },
+    { "name": "count_business_days", "description": "Count working days between two dates." },
+    { "name": "is_business_day", "description": "Check whether a date is a working day in a country." },
+    { "name": "next_business_day", "description": "Find the next working day after a date." },
+    { "name": "previous_business_day", "description": "Find the previous working day before a date." },
+    { "name": "country_rule", "description": "Show a country's weekend rule." }
+  ],
+  "compatibility": {
+    "claude_desktop": ">=0.10.0",
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": { "node": ">=18.0.0" }
+  }
+}
