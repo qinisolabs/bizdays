@@ -78,6 +78,10 @@ npm run build
 npm test
 ```
 
+## Privacy
+
+This tool runs locally on your machine and is built not to collect, store, or transmit your data — no analytics, no telemetry, no account. All reference data is bundled — no network calls, and nothing leaves your device. Full policy: <https://qinisolabs.github.io/privacy.html>.
+
 ## License
 
 Apache-2.0. Bundled holiday data is from `date-holidays` (ISC AND CC-BY-3.0); see `NOTICE`.

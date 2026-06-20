@@ -17,6 +17,7 @@
   "documentation": "https://qinisolabs.github.io/bizdays",
   "support": "https://github.com/qinisolabs/bizdays/issues",
   "license": "Apache-2.0",
+  "privacy_policies": ["https://qinisolabs.github.io/privacy.html"],
   "keywords": ["business-days", "working-days", "public-holidays", "calendar", "dates"],
   "server": {
     "type": "node",
