@@ -19,7 +19,7 @@ should still be confirmed.
 | Glama | auto-ingest from registry | ⏳ pending — verify | — | should appear in days; claim via qinisolabs GitHub, **no billing** |
 | mcp.so | auto-ingest / form | ⏳ pending — verify | — | submit if not auto-imported |
 | PulseMCP | auto-ingest from registry | ⏳ pending — verify | — | no action expected; confirm |
-| awesome-mcp-servers | **manual PR** | ⏳ to do | — | only truly manual step; PR to punkpeye/awesome-mcp-servers |
+| awesome-mcp-servers | **manual PR** | ✅ merged | 2026-06-19 | merged into punkpeye/awesome-mcp-servers |
 | Smithery | n/a (stdio) | ➖ skip | — | HTTP-only form; rely on registry ingest |
 | Launch post (Show HN / r/mcp / r/ClaudeAI) | manual | ⏳ when ready | — | lead with the 63%-counting / 23%-overall benchmark |
 
