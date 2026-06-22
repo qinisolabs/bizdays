@@ -1,6 +1,6 @@
 {
   "name": "@qinisolabs/bizdays",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "mcpName": "io.github.qinisolabs/bizdays",
   "description": "Verified business-day math for AI agents: holidays + per-country weekends, not guesses.",
   "license": "Apache-2.0",
